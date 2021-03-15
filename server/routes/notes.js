@@ -51,7 +51,7 @@ router.post('/notes', auth, async (req,res)=>{
 
 router.get('/notes/:id', auth, async (req,res)=>{
     try {
-        const notes = await Notes.find({postedBy: req.params.id}).populate('postedBy', '_id name email').sort('-createdAt')
+        const notes = await Notes.findById(req.params.id).populate('postedBy',"_id name email").sort('-createdAt')
         if(notes){
             res.status(200).json(notes)
         }else{
