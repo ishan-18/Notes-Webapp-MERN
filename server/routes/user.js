@@ -4,32 +4,31 @@ const User = mongoose.model('User')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const auth = require('../middleware/auth')
-const e = require('express')
 
 router.post('/register', async (req,res)=>{
     try {
         const {name, email, password} = req.body
         if(!name || !email || !password){
-            return res.status(422).json({err: "Please Enter all the fields"})
+            return res.status(422).json({msg: "Please Enter all the fields"})
         }
         const user = await User.findOne({email})
         if(user){
-            return res.status(422).json({err: "Email already exists"})
+            return res.status(422).json({msg: "Email already exists"})
         }
 
         const user1 = await User.findOne({name})
-        if(user1) return res.status(422).json({err: "Username ain't available"})
+        if(user1) return res.status(422).json({msg: "Username ain't available"})
 
         if(password.length < 6 && password.length > 14){
-            return res.status(422).json({err: "Password must contain atleast 6 characters and at the most 14 characters"})
+            return res.status(422).json({msg: "Password must contain atleast 6 characters and at the most 14 characters"})
         }
 
         if(name.length < 2 && name.length > 14){
-            return res.status(422).json({err: "Name must be of atleast 2 characters"})
+            return res.status(422).json({msg: "Name must be of atleast 2 characters"})
         }
 
         if(!/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)){
-            return res.status(401).json({err: "Invalid Email"})
+            return res.status(401).json({msg: "Invalid Email"})
         }
 
         const hashedPassword = await bcrypt.hash(password, 12)
@@ -102,6 +101,15 @@ router.get('/byId', auth, async (req,res)=>{
 
         })
 
+    } catch (err) {
+        return res.status(500).json({err: err.message})
+    }
+})
+
+router.get('/users', async (req,res)=>{
+    try {
+        const user = await User.find()
+        res.status(200).json(user)
     } catch (err) {
         return res.status(500).json({err: err.message})
     }
