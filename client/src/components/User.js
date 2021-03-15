@@ -18,7 +18,7 @@ const User = ({setIsLogin}) => {
     const onRegister = async e =>{
         e.preventDefault()
         try {
-            const res = await axios.post('/user/register', {
+            const res = await axios.post('user/register', {
                 name: user.name,
                 email: user.email,
                 password: user.password
@@ -33,7 +33,7 @@ const User = ({setIsLogin}) => {
     const onLogin = async e => {
         e.preventDefault()
         try {
-            const res = await axios.post('/user/login', {
+            const res = await axios.post('user/login', {
                 email: user.email,
                 password: user.password
             })
