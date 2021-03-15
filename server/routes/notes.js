@@ -18,8 +18,8 @@ router.get('/notes', auth, async (req,res)=>{
 
 router.post('/notes', auth, async (req,res)=>{
     try {
-        const {title, subtitle, body} = req.body
-        if(!title || !subtitle || !body){
+        const {title, subtitle, body, date} = req.body
+        if(!title || !subtitle || !body || !date){
             return res.status(422).json({err: "Please Enter all the fields"})
         }
 
@@ -36,6 +36,7 @@ router.post('/notes', auth, async (req,res)=>{
             title,
             subtitle,
             body,
+            date,
             postedBy: req.user
         })
 
@@ -63,8 +64,8 @@ router.get('/notes/:id', auth, async (req,res)=>{
 
 router.put('/notes/:id', auth, async (req,res)=>{
     try {
-        const {title, subtitle, body} = req.body
-        if(!title || !subtitle || !body){
+        const {title, subtitle, body, date} = req.body
+        if(!title || !subtitle || !body || !date){
             return res.status(422).json({err: "Please Enter all the fields"})
         }
 
@@ -80,7 +81,8 @@ router.put('/notes/:id', auth, async (req,res)=>{
         await Notes.findOneAndUpdate({_id: req.params.id}, {
             title, 
             subtitle,
-            body
+            body, 
+            date
         })
 
         res.status(201).json({msg: "Notes Updated Sucessfully"})
