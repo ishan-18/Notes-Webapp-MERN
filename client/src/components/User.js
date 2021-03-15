@@ -46,29 +46,34 @@ const User = ({setIsLogin}) => {
         }
     }
 
+    const [onSignin, setOnSignin] = useState(false)
+    const style = {
+        display: onSignin ? "block" : "none",
+        opacity: onSignin ? 1 : 0
+    }
 
     return (
-        <section>
-            <div className="login-form">
-                <label>Login</label>
+        <section className="login-page">
+            <div className="login-form create1" >
+                <h2>Login</h2>
                 <form onSubmit={onLogin}>
                     <input type="email" name="email" placeholder="Enter your Email:" required value={user.email} onChange={onChangeInput} />
                     <input type="password" name="password" placeholder="Enter your Password:" autoComplete="true" required value={user.password} onChange={onChangeInput} />
                     <button type="submit">Login</button>
-                    <p>Already Have an Account? <span>Register Now!</span></p>
+                    <p>Already Have an Account? <span onClick={()=> setOnSignin(true)}>Register Now!</span></p>
                 </form>
-                <p>{err}</p>
+                <h3>{err}</h3>
             </div>
-            <div className="register-form">
-                <label>Register</label>
+            <div className="register-form create1" style={style}>
+                <h2>Register</h2>
                 <form onSubmit={onRegister}>
                     <input type="text" name="name" placeholder="Enter your Name:" required value={user.name} onChange={onChangeInput} />
                     <input type="email" name="email" placeholder="Enter your Email:" required value={user.email} onChange={onChangeInput} />
                     <input type="password" name="password" placeholder="Enter your Password:" autoComplete="true" required value={user.password} onChange={onChangeInput} />
                     <button type="submit">Register</button>
-                    <p>Create an Account? <span>Wanna Login?</span></p>
+                    <p>Create an Account? <span onClick={()=>setOnSignin(false)}>Wanna Login?</span></p>
                 </form>
-                <p>{err}</p>
+                <h3>{err}</h3>
             </div>
         </section>
     )
