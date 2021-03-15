@@ -1,23 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useState, useEffect} from 'react'
+import axios from 'axios'
+import User from './components/User'
+import Notes from './components/Notes'
 
 function App() {
+
+  const [isLogin, setIsLogin] = useState(false)
+
+  useEffect(()=>{
+    const checkLogin = async ()=>{
+      const token = localStorage.getItem('token')
+      try {
+        const verified = await axios.get('/user/byId', {
+          headers: {Authorization: token}
+        })
+        console.log(verified)
+        setIsLogin(verified.data)
+        if(verified.data === false) return localStorage.clear()
+      } catch (err) {
+        setIsLogin(false)
+      }
+    }
+    checkLogin()
+  },[])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {
+        isLogin ? <Notes setIsLogin={setIsLogin} /> : <User setIsLogin={setIsLogin} />
+      }
     </div>
   );
 }
