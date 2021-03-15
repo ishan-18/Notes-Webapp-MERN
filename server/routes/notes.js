@@ -6,11 +6,7 @@ const Notes = mongoose.model('Notes')
 router.get('/notes', auth, async (req,res)=>{
     try {
         const notes = await Notes.find().populate('postedBy', '_id name email').sort('-createdAt')
-        if(notes){
-            res.status(200).json(notes)
-        }else{
-            return res.status(422).json({err: "Notes not found"})
-        }
+        res.status(200).json(notes)
     } catch (err) {
         return res.status(500).json({err: err.message})
     }
@@ -18,8 +14,8 @@ router.get('/notes', auth, async (req,res)=>{
 
 router.post('/notes', auth, async (req,res)=>{
     try {
-        const {title, subtitle, body, date} = req.body
-        if(!title || !subtitle || !body || !date){
+        const {title, subtitle, body} = req.body
+        if(!title || !subtitle || !body){
             return res.status(422).json({err: "Please Enter all the fields"})
         }
 
@@ -36,7 +32,6 @@ router.post('/notes', auth, async (req,res)=>{
             title,
             subtitle,
             body,
-            date,
             postedBy: req.user
         })
 
