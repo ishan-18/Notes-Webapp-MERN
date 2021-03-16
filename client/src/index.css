@@ -5,7 +5,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #121212;
+  /* background: #121212; */
+  background: #08080D;
   font-family: 'Open Sans', sans-serif !important;
 }
 
@@ -66,7 +67,8 @@ a{
   width: 100%;
   border-top: 2px solid #1a1717;
   padding: 20px 0;
-  background-color: #121212;
+  /* background-color: #121212; */
+  background-color: #08080D;
 }
 
 .note-wrapper{
@@ -80,12 +82,13 @@ a{
 .note-wrapper .card{
   width: 300px;
   background-color: #1a1717;
-  box-shadow: 0 0 5px #1a1717;
+  /* background-color: rgba(44,43,43,0.678); */
   padding: 15px;
   position: relative;
   color:#ddd;
   margin: 15px;
   cursor: pointer;
+  border-radius: 5px 5px 5px 5px;
 }
 
 @media screen and (max-width: 320px){
@@ -146,10 +149,12 @@ a{
   max-width: 500px;
   width: 80%;
   margin: auto auto;
-  border: 2px solid #1a1717;
-  background-color: #1a1717;
+  border: 2px solid #08080D;
+  background-color: #121212;
+  /* background-color: #08080D; */
   border-radius: 5px 5px 5px 5px;
   padding: 30px;
+  color: #fff;
 }
 
 .create h2{
@@ -169,6 +174,10 @@ a{
   height: 40px;
   padding: 0 5px;
   border-radius: 5px 5px 5px 5px;
+  background-color: rgba(44,43,43,0.678);
+  border: none;
+  outline: none;
+  color: #fff;
 }
 
 .create label{
@@ -182,6 +191,10 @@ a{
   border-radius: 5px 5px 5px 5px;
   resize: none;
   padding: 0 5px;
+  background-color: rgba(44,43,43,0.678);
+  color: #fff;
+  border: none;
+  outline: none;
 }
 
 .create button{
@@ -190,10 +203,11 @@ a{
   margin-left: 25%;
   outline: none;
   border: none;
-  background-color: #000;
+  background-color: rgb(18, 56, 160);
   color: #fff;
   font-weight: 700;
   letter-spacing: 2px;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 500px){
@@ -236,6 +250,7 @@ a{
   height: 40px;
   padding: 0 5px;
   border-radius: 5px 5px 5px 5px;
+  cursor: pointer;
 }
 
 .create1 label{
@@ -257,10 +272,11 @@ a{
   margin-left: 25%;
   outline: none;
   border: none;
-  background-color: #000;
+  background-color: rgb(18, 56, 160);
   color: #fff;
   font-weight: 700;
   letter-spacing: 2px;
+  cursor: pointer;
 }
 
 .login-page{
@@ -296,6 +312,7 @@ a{
   text-align: center;
   text-transform: uppercase;
   margin-top: 15px;
+  color: #fff;
 }
 
 .login-page p{
